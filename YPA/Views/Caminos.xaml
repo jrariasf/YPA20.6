@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:local="clr-namespace:YPA.Views.DataTemplates"    
+             mc:Ignorable="d"
+             x:Class="YPA.Views.Caminos"
+             Title="Caminos">
+
+    <ContentPage.ToolbarItems>
+        <!-- <ToolbarItem Text="+"  Clicked="OnNoteAddedClicked" CommandParameter="prueba" /> -->
+        <ToolbarItem Text="+"  Command="{Binding AddCaminoClicked}"
+                               CommandParameter="toma mi parámetro" />
+    </ContentPage.ToolbarItems>
+<!--
+    <ListView x:Name="listView"
+              Margin="20"
+              ItemSelected="OnListViewItemSelected">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <local:CellCamino/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+-->    
+    
+    <StackLayout BackgroundColor="Red"  Orientation="Vertical">
+        <!-- <Label Text="{Binding miTexto}"  WidthRequest="300" HeightRequest="60" FontSize="14"/> -->
+        <ListView x:Name="listView"
+              ItemsSource="{Binding listaCaminos, Mode=TwoWay}"
+              IsGroupingEnabled="False" 
+              RowHeight="40" SeparatorVisibility="None" BackgroundColor="White">
+
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped"
+                                          Command="{Binding ItemTappedCommand}"
+                                          EventArgsParameterPath="Item" />
+            </ListView.Behaviors>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:CellCamino />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>        

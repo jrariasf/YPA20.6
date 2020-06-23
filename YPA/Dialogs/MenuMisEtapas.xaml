@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:YPA.Views.DataTemplates"
+             x:Class="YPA.Dialogs.MenuMisEtapas">
+
+    <StackLayout Orientation="Vertical"
+                 BackgroundColor="#F8EDED" HeightRequest="{Binding alturaMenu}" WidthRequest="250"
+                 VerticalOptions="Center" Padding="4,0" Spacing="0">
+
+        <Button Text="Insertar día al inicio" HeightRequest="50" WidthRequest="220" HorizontalOptions="CenterAndExpand"  Command="{Binding InsertarDiaAlInicio}" />
+        <Button Text="Añadir día al final" HeightRequest="50" WidthRequest="220" HorizontalOptions="CenterAndExpand"  Command="{Binding InsertarDiaAlFinal}" />
+        <Button Text="Unir esta etapa y la siguiente" HeightRequest="50" WidthRequest="220" HorizontalOptions="CenterAndExpand"  Command="{Binding UnirEtapas}"  IsVisible="{Binding botonUnirVisible}" />
+        <Button Text="CLOSE" MinimumWidthRequest="100" HorizontalOptions="CenterAndExpand"  Command="{Binding CloseCommand}" />
+
+    </StackLayout>
+    
+</Frame>    

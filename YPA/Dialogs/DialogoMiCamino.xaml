@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Frame xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:YPA.Views.DataTemplates"
+             x:Class="YPA.Dialogs.DialogoMiCamino">
+
+    <!-- ItemsSource="{Binding listaEtapas, Mode=TwoWay}" -->
+
+    <StackLayout Orientation="Vertical"
+                 BackgroundColor="#F8EDED" HeightRequest="400" WidthRequest="350"
+                 VerticalOptions="Center" Padding="4,0" Spacing="0">
+
+        
+        <Label Text="{Binding Message, FallbackValue=Sin MEN}"      
+               BackgroundColor="Yellow" TextColor="Red" HeightRequest="20"
+               FontSize="Caption" FontAttributes="Bold"  />
+        
+        <Grid ColumnSpacing="0" BackgroundColor="#F4F7AE" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Día" Grid.Column="0" FontSize="Micro" />
+            <Label Text="Salida" Grid.Column="1" FontSize="Micro" />
+            <Label Text="Llegada" Grid.Column="2" FontSize="Micro" />
+            <Label Text="Distancia" Grid.Column="3" FontSize="Micro" />
+
+        </Grid>
+    
+        <ListView x:Name="listView1"      
+              ItemsSource="{Binding listaEtapas, Mode=TwoWay}"
+              IsGroupingEnabled="False" 
+              RowHeight="35" SeparatorVisibility="Default" BackgroundColor="#EAFAF8" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:CellEtapaCamino/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Close" HorizontalOptions="Center"  Command="{Binding CloseCommand}" />
+            <Button Text="Print" HorizontalOptions="Center"  Command="{Binding PrintCommand}" />
+        </StackLayout>
+
+    </StackLayout>
+
+</Frame>
+
+
+<!--
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundColor="#F8EDED"
+             HeightRequest="400" WidthRequest="350"
+             VerticalOptions="Center"
+             x:Class="YPA.Dialogs.DialogoMiCamino">
+    
+    <Label Text="{Binding Message}" BackgroundColor="Yellow" TextColor="Red" FontSize="Caption" FontAttributes="Bold" />
+    <Label Text="{Binding etapas}"  BackgroundColor="#F4F7AE" 
+           MaxLines="15" FontSize="Caption"
+           MinimumHeightRequest="50" HeightRequest="{Binding alturaLabel}"
+           HorizontalOptions="FillAndExpand" LineBreakMode="NoWrap"  />
+    <Button Text="Close" HorizontalOptions="Center"
+            Command="{Binding CloseCommand}" />
+</StackLayout>
+    
+    -->

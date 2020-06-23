@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"             
+             mc:Ignorable="d"            
+             xmlns:local="clr-namespace:YPA.Views.DataTemplates"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:converter="clr-namespace:YPA.Views"
+             x:Class="YPA.Views.VerCamino"
+             Title="VerCamino">
+
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="Guardar" IconImageSource="ic_grabar"
+                 Command="{Binding GuardarCamino}"  >
+            <!--
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource"
+                    Android="plus"
+                    WinPhone="Assets/add.png" />
+            </ToolbarItem.Icon>
+            -->
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <!--
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:IntToColorStringConverter x:Key="intToColorString" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+ -->
+
+
+
+
+    <StackLayout Orientation="Vertical" Margin="6,0" BackgroundColor="#E1FAF9" >
+
+        <Grid ColumnSpacing="0"  BackgroundColor="#F5FF0D" VerticalOptions="Center" RowSpacing="1" Margin="0" IsVisible="{Binding mostrarCabecera}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="35" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Nombre:" FontSize="Caption" Grid.Row="0" Grid.Column="0"  BackgroundColor="#91F2E8" TextColor="Black" VerticalTextAlignment="End" />
+            <Entry Text="{Binding miCamino.miNombreCamino,FallbackValue=NO NOMBRE}" FontSize="Caption" Grid.Row="1" Grid.Column="0" 
+                   BackgroundColor="#F0F5A2" TextColor="Black" HeightRequest="30" HorizontalTextAlignment="Start"/>
+
+            <Label Text="Descripción:" FontSize="Caption" Grid.Row="0" Grid.Column="1" BackgroundColor="#91F2E8" TextColor="Black" VerticalTextAlignment="End" />
+            <Entry Text="{Binding miCamino.descripcion,FallbackValue=NO DESCRIP}" FontSize="Caption" Grid.Row="1" Grid.Column="1" BackgroundColor="#F0F5A2" TextColor="Black" HeightRequest="30" />
+
+            <Label Text="Día:" FontSize="Caption" Grid.Row="0" Grid.Column="2" BackgroundColor="#91F2E8" TextColor="Black" VerticalTextAlignment="End" />
+            <DatePicker VerticalOptions="CenterAndExpand"  Grid.Row="1" Grid.Column="2" BackgroundColor="#F0F5A2" TextColor="Black" FontSize="Micro"
+                Date="{Binding Path=miCamino.fechaInicio, TargetNullValue={x:Static sys:DateTime.Now}}" >
+                <DatePicker.Format>yyyy-MM-dd</DatePicker.Format>
+                <DatePicker.MinimumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Jan 1 2000</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MinimumDate>
+                <DatePicker.MaximumDate>
+                    <sys:DateTime x:FactoryMethod="Parse">
+                        <x:Arguments>
+                            <x:String>Jul 18 2073</x:String>
+                        </x:Arguments>
+                    </sys:DateTime>
+                </DatePicker.MaximumDate>
+            </DatePicker>
+
+
+
+        </Grid>
+
+        <StackLayout Orientation="Horizontal" HeightRequest="35" BackgroundColor="#FFE1FAF9" IsVisible="{Binding mostrarCabecera}"  >
+            <Button Text="Guardar" Grid.Row="0" Grid.Column="3" HeightRequest="35"
+                    Command="{Binding GuardarCamino}" FontSize="Micro" />
+            <Button Text="Resumen" Grid.Row="1" Grid.Column="3" HeightRequest="35"
+                    Command="{Binding VerResumenCamino}" FontSize="Micro" />
+            <Label Text="{Binding miCamino.resumen,FallbackValue=NO RESUMEN}" HeightRequest="35" BackgroundColor="Yellow"
+                   HorizontalTextAlignment="End"  VerticalTextAlignment="Center"  HorizontalOptions="EndAndExpand" 
+                   WidthRequest="200" />
+        </StackLayout>
+
+        <ListView x:Name="listView"   
+              ItemsSource="{Binding listaPuntosDePaso, Mode=TwoWay}"
+              IsGroupingEnabled="False"
+              RowHeight="35" SeparatorVisibility="None" BackgroundColor="red" HeightRequest="90" >
+            <!-- ="35" SeparatorVisibility="None" BackgroundColor="#90F5EB" > -->
+            <!--
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped"
+                                          Command="{Binding ItemTappedCommand}"
+                                          EventArgsParameterPath="Item" />
+            </ListView.Behaviors>
+            -->
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <local:CellNodoCamino/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+
+</ContentPage>
